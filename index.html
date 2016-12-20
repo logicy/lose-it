@@ -6,12 +6,61 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script type="text/javascript">
     var app = angular.module('loseItApp',[]);
-    app.controller('mainCntr',function(){
+    app.controller('mainCntr',['$scope', function($){
+      $.config = {};
+      $.config.m = 3;
+      $.config.n = 3;
 
-    })
+      $.flag = {};
+      $.flag.turnPlayer = true;
+
+      $.matrix = [
+        [0,0,0],
+        [0,0,0],
+        [0,0,0]
+      ];
+
+      $.handleClick = function(i,j){
+        console.log(i,j);
+        if ($.flag.turnPlayer) {
+          $.matrix[i][j] = 1;
+        }
+        else {
+          $.matrix[i][j] = 2;
+        }
+        $.flag.turnPlayer = !$.flag.turnPlayer;
+      }
+
+      $.showMatrixValue = function(i,j){
+        console.log(i,j);
+        return $.matrix[i][j];
+      }
+
+      //number to array for ng-repeat: 4 -> [1,2,3,4]
+    	$.numberToArray = function(num){
+    		var arr = [];
+    		//i must start with 1 and end to num
+    		for (var i = 1; i <= num; i++) {arr.push(i);};
+    		return arr;
+    	}
+    }])
     </script>
   </head>
   <body ng-controller="mainCntr">
-    {{3+4}}
+    {{config.m+config.n}}
+    <table>
+      <tbody>
+        <tr ng-repeat="r in numberToArray(config.m)">
+          <td ng-repeat="c in numberToArray(config.n)" ng-click="handleClick($index,$parent.$index)">
+            <span>{{showMatrixValue($index,$parent.$index)}}</span>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td colspan="3">status:</td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>
