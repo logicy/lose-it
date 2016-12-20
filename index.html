@@ -21,18 +21,91 @@
       ];
 
       $.handleClick = function(i,j){
-        console.log(i,j);
-        if ($.flag.turnPlayer) {
-          $.matrix[i][j] = 1;
+        // console.log(i,j);
+        if (!$.matrix[i][j]){
+          if ($.flag.turnPlayer) {
+            $.matrix[i][j] = 1;
+          }
+          else {
+            $.matrix[i][j] = 2;
+          }
+          // console.log('--------',$.checkWin());
+          $.flag.winStatus = $.checkWin() + 'wins';
+          $.flag.turnPlayer = !$.flag.turnPlayer;
         }
-        else {
-          $.matrix[i][j] = 2;
+      }
+
+      $.checkWin = function(){
+        var m = $.config.m;
+        var n = $.config.n;
+        var map = $.matrix;
+
+        //check all m horizontals
+        for (var i = 0; i < m; i++) {
+          var win = true;
+          for (var j = 0; j < n; j++) {
+            if (!!map[i][j]) {//console.log('ifNotZero');
+              if (j>0) {
+                if(map[i][j]!=map[i][j-1]) {
+                  win = false;break;
+                }
+              }
+            }
+            else {
+              win = false;break;
+            }
+          }
+          if (win) {
+            return map[i][0];
+          }
         }
-        $.flag.turnPlayer = !$.flag.turnPlayer;
+
+        //check all n verticals
+        for (var j = 0; j < m; j++) {
+          var win = true;
+          for (var i = 0; i < n; i++) {
+            if (!!map[i][j]) {//console.log('ifNotZero');
+              if (i>0) {
+                if(map[i][j]!=map[i-1][j]) {
+                  win = false;break;
+                }
+              }
+            }
+            else {
+              win = false;break;
+            }
+          }
+          if (win) {
+            return map[0][j];
+          }
+        }
+
+        //check both diagonals
+        for (var i = 0; i < m; i++) {
+          var win = true;
+          for (var j = 0; j < n; j++) {
+            if (!!map[i][j]) {//console.log('ifNotZero');
+              if (j>0) {
+                if(map[i][j]!=map[i][j-1]) {
+                  win = false;break;
+                }
+              }
+            }
+            else {
+              win = false;break;
+            }
+          }
+          if (win) {
+            return map[i][0];
+          }
+        }
+
+        return -1;
+
       }
 
       $.showMatrixValue = function(i,j){
-        console.log(i,j);
+        // console.log(i,j);
         return $.matrix[i][j];
       }
 
@@ -51,14 +124,14 @@
     <table>
       <tbody>
         <tr ng-repeat="r in numberToArray(config.m)">
-          <td ng-repeat="c in numberToArray(config.n)" ng-click="handleClick($index,$parent.$index)">
-            <span>{{showMatrixValue($index,$parent.$index)}}</span>
+          <td ng-repeat="c in numberToArray(config.n)" ng-click="handleClick($parent.$index,$index)">
+            <span>{{showMatrixValue($parent.$index,$index)}}</span>
           </td>
         </tr>
       </tbody>
       <tbody>
         <tr>
-          <td colspan="3">status:</td>
+          <td colspan="3">status:{{flag.winStatus}}</td>
         </tr>
       </tbody>
     </table>
