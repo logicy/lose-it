@@ -8,17 +8,20 @@
     var app = angular.module('loseItApp',[]);
     app.controller('mainCntr',['$scope', function($){
       $.config = {};
-      $.config.m = 3;
-      $.config.n = 3;
+      $.config.m = 4;
+      $.config.n = 4;
 
       $.flag = {};
       $.flag.turnPlayer = true;
 
-      $.matrix = [
-        [0,0,0],
-        [0,0,0],
-        [0,0,0]
-      ];
+      $.matrix = [];
+      for (var i = 0; i < $.config.m; i++) {
+        var a = [];
+        for (var j = 0; j < $.config.n; j++) {
+          a.push(0);
+        }
+        $.matrix.push(a);
+      }
 
       $.handleClick = function(i,j){
         // console.log(i,j);
