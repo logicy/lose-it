@@ -26,3 +26,4 @@ whenever game is over by win: empty cells will become -1
 
 more levels:
 incremental = board will be 4x4 but clickable area 'd be 3x3 [0,1,2]x[0,1,2]; when its filled (and/or game is tie) rest area [0,1,2,3]<->[3] (light dimmed) 'd become clickable; and game will proceed
+e.g. = 8x8; start 3x3; increment oneByOne|oneTwoOne|twoByTwo|..|all; onlyTieCase|onlyWinCase|both
