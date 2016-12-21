@@ -1,0 +1,28 @@
+flags in matrix
+n:1,2,3,4... = occupied by n-th player; not-clickable
+[<=0| 0,-1,..] = empty
+0 = empty; clickable
+-1 = empty; not-clickable [may be game over| need some condition to be clickable]
+
+OOP
+
+board: size-m, size-n, cell
+board.cell: i,j
+game: matrix, board-size, noOfPlayers, win-algo(), winner
+player: name, record, move(cell)
+//move: coordinates, playerKey
+bot: name, smartness, move(lastMove,game.matrix)
+matrix: "all i,j values of cells on board"
+player.record: wins, loss, ties, "in which levels"
+
+
+levels: [{sequence, levelConfig},...]
+levelConfig: board, botEnabled, toughness
+-------
+
+
+rule:
+whenever game is over by win: empty cells will become -1
+
+more levels:
+incremental = board will be 4x4 but clickable area 'd be 3x3 [0,1,2]x[0,1,2]; when its filled (and/or game is tie) rest area [0,1,2,3]<->[3] (light dimmed) 'd become clickable; and game will proceed
