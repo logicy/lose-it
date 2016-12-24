@@ -84,12 +84,12 @@
         }
 
         //check both diagonals
-        for (var i = 0; i < m; i++) {
+        {//check left diagonal
           var win = true;
           for (var j = 0; j < n; j++) {
-            if (!!map[i][j]) {//console.log('ifNotZero');
+            if (!!map[j][j]) {//console.log('ifNotZero');
               if (j>0) {
-                if(map[i][j]!=map[i][j-1]) {
+                if(map[j][j]!=map[j-1][j-1]) {
                   win = false;break;
                 }
               }
@@ -99,11 +99,30 @@
             }
           }
           if (win) {
-            return map[i][0];
+            return map[0][0];//or j-1,j-1
           }
         }
 
-        return -1;
+        {//check right diagonal
+          var win = true;
+          for (var j = 0; j < n; j++) {
+            if (!!map[j][n-j-1]) {//console.log('ifNotZero');
+              if (j>0) {
+                if(map[j][n-j-1]!=map[j-1][n-j]) {
+                  win = false;break;
+                }
+              }
+            }
+            else {
+              win = false;break;
+            }
+          }
+          if (win) {
+            return map[0][n-1];//or j-1,j-1
+          }
+        }
+
+        return "Nobody ";
 
       }
 
