@@ -1,8 +1,24 @@
+
 <!DOCTYPE html>
 <html ng-app="loseItApp">
   <head>
     <meta charset="utf-8">
     <title>tic-tac</title>
+    <style>
+    table{
+    	border-collapse: collapse;
+    }
+    td{
+    	border: 1px solid;
+    	border-collapse: collapse;
+    	width: 30px;
+    	height: 30px;
+    	text-align: center;
+    }
+    td:hover{
+    	cursor: pointer;
+    }
+    </style>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script type="text/javascript">
     var app = angular.module('loseItApp',[]);
@@ -12,7 +28,7 @@
       $.config.n = 4;
 
       $.flag = {};
-      $.flag.turnPlayer = true;
+      $.flag.turnPlayer = false;
 
       $.matrix = [];
       for (var i = 0; i < $.config.m; i++) {
@@ -34,6 +50,7 @@
           }
           // console.log('--------',$.checkWin());
           $.flag.winStatus = $.checkWin() + 'wins';
+          // alert($.flag.winStatus);
           $.flag.turnPlayer = !$.flag.turnPlayer;
         }
       }
@@ -142,20 +159,16 @@
     </script>
   </head>
   <body ng-controller="mainCntr">
-    {{config.m+config.n}}
+    <!-- {{config.m+config.n}}
+    <input type="number" ng-model="config.m" value="3">
+    <input type="number" ng-model="config.n" value="3"> -->
     <table>
       <tbody>
         <tr ng-repeat="r in numberToArray(config.m)">
-          <td ng-repeat="c in numberToArray(config.n)" ng-click="handleClick($parent.$index,$index)">
-            <span>{{showMatrixValue($parent.$index,$index)}}</span>
-          </td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr>
-          <td colspan="{{config.n}}">status:{{flag.winStatus}}</td>
+          <td ng-repeat="c in numberToArray(config.n)" ng-click="handleClick($parent.$index,$index)">{{showMatrixValue($parent.$index,$index)==1?'O':showMatrixValue($parent.$index,$index)==2?'X':''}}</td>
         </tr>
       </tbody>
     </table>
+    <p>{{flag.winStatus}}</p>
   </body>
 </html>
