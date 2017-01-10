@@ -23,20 +23,23 @@
     <script type="text/javascript">
     var app = angular.module('loseItApp',[]);
     app.controller('mainCntr',['$scope', function($){
-      $.config = {};
-      $.config.m = 3;
-      $.config.n = 3;
 
-      $.flag = {};
-      $.flag.turnPlayer = false;
+      $.startGame = function(boardSize, firstTurn, gameType) {
+        $.config = {};
+        $.config.m = boardSize || 3;
+        $.config.n = boardSize || 3;
 
-      $.matrix = [];
-      for (var i = 0; i < $.config.m; i++) {
-        var a = [];
-        for (var j = 0; j < $.config.n; j++) {
-          a.push(0);
+        $.flag = {};
+        $.flag.turnPlayer = !!firstTurn;
+
+        $.matrix = [];
+        for (var i = 0; i < $.config.m; i++) {
+          var a = [];
+          for (var j = 0; j < $.config.n; j++) {
+            a.push(0);
+          }
+          $.matrix.push(a);
         }
-        $.matrix.push(a);
       }
 
       $.handleClick = function(i,j){
@@ -155,6 +158,8 @@
     		for (var i = 1; i <= num; i++) {arr.push(i);};
     		return arr;
     	}
+
+      $.startGame();
     }])
     </script>
   </head>
