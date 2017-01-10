@@ -176,7 +176,7 @@
     <input type="number" ng-model="config.m" value="3">
     <input type="number" ng-model="config.n" value="3"> -->
     <div class="beforeGame" ng-if="gameState==0">
-      <input type="number" ng-model="board.size">
+      <input placeholder="Board Size" type="number" ng-model="board.size">
       <button ng-click="startGame(board.size)">just start game!</button>
     </div>
     <table ng-if="gameState>=2">
@@ -188,7 +188,7 @@
     </table>
     <p>{{flag.winStatus}}</p>
     <div class="afterGame" ng-if="gameState>=3">
-      <input type="number" ng-model="board.size">
+      <input placeholder="Board Size" type="number" ng-model="board.size">
       <button ng-click="startGame(board.size)">restart game!</button>
     </div>
   </body>
