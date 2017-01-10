@@ -46,6 +46,7 @@
       }
 
       $.handleClick = function(i,j){
+        if ($.gameState>=3) {return;}
         // console.log(i,j);
         if (!$.matrix[i][j]){
           if ($.flag.turnPlayer) {
@@ -186,5 +187,9 @@
       </tbody>
     </table>
     <p>{{flag.winStatus}}</p>
+    <div class="afterGame" ng-if="gameState>=3">
+      <input type="number" ng-model="board.size">
+      <button ng-click="startGame(board.size)">restart game!</button>
+    </div>
   </body>
 </html>
