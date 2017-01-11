@@ -33,10 +33,36 @@ var app = angular.module('loseItApp',[]);
             $.matrix[i][j] = 2;
           }
           // console.log('--------',$.checkWin());
-          $.flag.winStatus = $.checkWin() + 'wins';
-          // alert($.flag.winStatus);
+          // $.flag.gameStatusText = $.checkWin() + 'wins';
+          if (!$.checkWin()) {
+            if($.checkTie()) {
+              $.gameState = 5; //gameOverTie
+              $.flag.gameStatusText = "game tie.";
+            }
+          } else {
+            $.gameState = 4; //gameOverWin
+            $.flag.gameStatusText = ($.checkWin()==2?'X':'O') + ' wins.';
+          };
+          // alert($.flag.gameStatusText);
           $.flag.turnPlayer = !$.flag.turnPlayer;
         }
+      }
+
+      $.checkTie = function(){
+        var m = $.config.m;
+        var n = $.config.n;
+        var map = $.matrix;
+
+        //check if all filled
+        var tie = true;
+        for (var i = 0; i < m; i++) {
+          for (var j = 0; j < n; j++) {
+            if (!map[i][j]) {
+              var tie = false;break;
+            }
+          }
+        }
+        return tie;
       }
 
       $.checkWin = function(){
@@ -60,7 +86,6 @@ var app = angular.module('loseItApp',[]);
             }
           }
           if (win) {
-            $.gameState = 4; //gameOverWin
             return map[i][0];
           }
         }
@@ -81,7 +106,6 @@ var app = angular.module('loseItApp',[]);
             }
           }
           if (win) {
-            $.gameState = 4; //gameOverWin
             return map[0][j];
           }
         }
@@ -102,7 +126,6 @@ var app = angular.module('loseItApp',[]);
             }
           }
           if (win) {
-            $.gameState = 4; //gameOverWin
             return map[0][0];//or j-1,j-1
           }
         }
@@ -122,7 +145,6 @@ var app = angular.module('loseItApp',[]);
             }
           }
           if (win) {
-            $.gameState = 4; //gameOverWin
             return map[0][n-1];//or j-1,j-1
           }
         }

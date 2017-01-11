@@ -33,7 +33,7 @@
         </tr>
       </tbody>
     </table>
-    <p>{{flag.winStatus}}</p>
+    <p>{{flag.gameStatusText}}</p>
     <div class="afterGame" ng-if="gameState>=3">
       <input placeholder="Board Size" type="number" ng-model="board.size">
       <button ng-click="startGame(board.size)">restart game!</button>
