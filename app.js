@@ -1,12 +1,15 @@
 var app = angular.module('loseItApp',[]);
     app.controller('mainCntr',['$scope', function($){
       $.gameState = 0; //noGame
+      $.defaultBoardSize = 3
+      $.pastBoardSize = $.pastBoardSize || $.defaultBoardSize;
 
       $.startGame = function(boardSize, firstTurn, gameType) {
         $.gameState = 1; //gameReady
         $.config = {};
-        $.config.m = boardSize || 3;
-        $.config.n = boardSize || 3;
+        $.config.m = boardSize || $.pastBoardSize;
+        $.config.n = boardSize || $.pastBoardSize;
+        $.pastBoardSize = boardSize || $.pastBoardSize;
 
         $.flag = {};
         $.flag.turnPlayer = !!firstTurn;

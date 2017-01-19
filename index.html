@@ -24,7 +24,7 @@
   <body ng-controller="mainCntr">
     <div class="beforeGame" ng-if="gameState==0">
       <input placeholder="Board Size" type="number" ng-model="board.size">
-      <button ng-click="startGame(board.size)">just start game!</button>
+      <button ng-click="startGame(board.size)">just start game! with {{pastBoardSize}}x{{pastBoardSize}}</button>
     </div>
     <table ng-if="gameState>=2">
       <tbody>
@@ -36,8 +36,9 @@
     <p>{{flag.gameStatusText}}</p>
     <div class="afterGame" ng-if="gameState>=3">
       <input placeholder="Board Size" type="number" ng-model="board.size">
-      <button ng-click="startGame(board.size)">restart game!</button>
+      <button ng-click="startGame(board.size)">restart game!<!--  with {{pastBoardSize}}x{{pastBoardSize}} --></button>
+      <button ng-click="startGame(defaultBoardSize)" ng-if="defaultBoardSize!=pastBoardSize"> with {{defaultBoardSize}}x{{defaultBoardSize}}</button>
     </div>
-    <script type="text/javascript" src="./app.min.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
   </body>
 </html>
