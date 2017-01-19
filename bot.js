@@ -2,7 +2,7 @@
 * @Author: Sushil Jain
 * @Date:   2017-01-19 14:48:59
 * @Last Modified by:   sushiljainam
-* @Last Modified time: 2017-01-19 15:15:17
+* @Last Modified time: 2017-01-19 15:57:27
 */
 
 'use strict';
@@ -17,9 +17,27 @@ var Bot = function(name, smartness){
 	this.fullName = getName.bind(null,this.name);
 }
 
+/**
+ * decides bot's move
+ * @param  {Array}  matrix  Optional, board detail 2D-array
+ * @param  {Array}  moves   list of all moves happend yet
+ * @return {Object}         move response
+ */
 Bot.prototype.move = function(matrix,moves) {
-	var moves = moves || [];
-	if(moves)
+	if (!moves) {
+		moves = matrix;
+		matrix = null;
+	};
+	moves = moves || [];
+	if(!moves.length){
+		//random move
+		// return;
+	}
+	if (moves.length == 1) {
+		var firstMove = moves[0];
+		//3 cases
+		// firstMove.isCorner();firstMove.isCenter();ELSE
+	};
 	return "move";
 };
 
