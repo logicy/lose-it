@@ -2,7 +2,7 @@
 * @Author: Sushil Jain
 * @Date:   2017-01-19 14:48:59
 * @Last Modified by:   sushiljainam
-* @Last Modified time: 2017-01-19 15:57:27
+* @Last Modified time: 2017-01-25 17:47:40
 */
 
 'use strict';
@@ -15,6 +15,7 @@ var Bot = function(name, smartness){
 	this.fname = getName.bind(null,this.name,1);
 	this.lname = getName.bind(null,this.name,2);
 	this.fullName = getName.bind(null,this.name);
+	// return this;
 }
 
 /**
@@ -51,3 +52,4 @@ c.log(n.fname());
 c.log(n.lname());
 c.log(n.fullName());
 c.log(n.move());
+c.log(n);

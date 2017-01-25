@@ -22,6 +22,11 @@ var app = angular.module('loseItApp',[]);
           }
           $.matrix.push(a);
         }
+        if (!gameType) {
+          $.players = {};
+          $.players.bot1 = new Bot('bot botty');
+          console.log($.players);
+        };
         $.gameState = 2; //gameStarted
       }
 
@@ -50,6 +55,9 @@ var app = angular.module('loseItApp',[]);
           // alert($.flag.gameStatusText);
           $.flag.turnPlayer = !$.flag.turnPlayer;
         }
+        if (!$.gameType && $.flag.turnPlayer) {
+          $.handleClick($.players.bot1.move()/*Math.floor(Math.random()*$.config.m),Math.floor(Math.random()*$.config.n)*/);
+        };
       }
 
       $.checkTie = function(){
