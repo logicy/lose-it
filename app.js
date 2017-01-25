@@ -26,7 +26,8 @@ var app = angular.module('loseItApp',[]);
       }
 
       $.handleClick = function(i,j){
-        if ($.gameState>=3) {return;}
+        if ($.gameState>=10) {return;}
+        $.gameState = 3; //gameTouched
         // console.log(i,j);
         if (!$.matrix[i][j]){
           if ($.flag.turnPlayer) {
@@ -39,11 +40,11 @@ var app = angular.module('loseItApp',[]);
           // $.flag.gameStatusText = $.checkWin() + 'wins';
           if (!$.checkWin()) {
             if($.checkTie()) {
-              $.gameState = 5; //gameOverTie
+              $.gameState = 12; //gameOverTie
               $.flag.gameStatusText = "game tie.";
             }
           } else {
-            $.gameState = 4; //gameOverWin
+            $.gameState = 11; //gameOverWin
             $.flag.gameStatusText = ($.checkWin()==2?'X':'O') + ' wins.';
           };
           // alert($.flag.gameStatusText);

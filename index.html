@@ -26,15 +26,18 @@
       <input placeholder="Board Size" type="number" ng-model="board.size">
       <button ng-click="startGame(board.size)">just start game! with {{pastBoardSize}}x{{pastBoardSize}}</button>
     </div>
-    <table ng-if="gameState>=2">
-      <tbody>
-        <tr ng-repeat="r in numberToArray(config.m)">
-          <td ng-repeat="c in numberToArray(config.n)" ng-click="handleClick($parent.$index,$index)">{{showMatrixValue($parent.$index,$index)==1?'O':showMatrixValue($parent.$index,$index)==2?'X':''}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="duringGame" ng-if="gameState>=2">
+      <table>
+        <tbody>
+          <tr ng-repeat="r in numberToArray(config.m)">
+            <td ng-repeat="c in numberToArray(config.n)" ng-click="handleClick($parent.$index,$index)">{{showMatrixValue($parent.$index,$index)==1?'O':showMatrixValue($parent.$index,$index)==2?'X':''}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button ng-if="gameState==3" ng-click="startGame(board.size)">reset game!</button>
+    </div>
     <p>{{flag.gameStatusText}}</p>
-    <div class="afterGame" ng-if="gameState>=3">
+    <div class="afterGame" ng-if="gameState>=10">
       <input placeholder="Board Size" type="number" ng-model="board.size">
       <button ng-click="startGame(board.size)">restart game!<!--  with {{pastBoardSize}}x{{pastBoardSize}} --></button>
       <button ng-click="startGame(defaultBoardSize)" ng-if="defaultBoardSize!=pastBoardSize"> with {{defaultBoardSize}}x{{defaultBoardSize}}</button>
