@@ -27,3 +27,47 @@ whenever game is over by win: empty cells will become -1
 more levels:
 incremental = board will be 4x4 but clickable area 'd be 3x3 [0,1,2]x[0,1,2]; when its filled (and/or game is tie) rest area [0,1,2,3]<->[3] (light dimmed) 'd become clickable; and game will proceed
 e.g. = 8x8; start 3x3; increment oneByOne|oneTwoOne|twoByTwo|..|all; onlyTieCase|onlyWinCase|both
+
+-------------------
+
+
+var Game = function (board, players, moves, config, reports) {
+	addPlayer()
+	//add to players array
+	performMove()
+	//is move allowed <-- board, config, reports
+	//add to moves array <-- moves
+	//check game over
+	//check winner
+	//set next turn
+	gameStart()
+	//init Board
+	//set initial turn <-- config.firstTurn
+	checkOver()
+	//check game over <-- board | moves
+	checkWin()
+	//check win <-- board | moves
+}
+var Move = function (cell, byPlayer) {
+	// body...
+}
+var Board = function (boardSize) {
+	init()
+	initCellsEmpty()
+}
+var Cell = function (i, j) {
+	i,j,fill
+	doFill()
+	isEmpty()
+	isCorner()
+	isCenter()
+	isEdge()
+}
+var Player = function (name, type) {
+	requestMove()
+	updateProfile()
+	isBot()
+}
+var Bot.move = function (game.moves){
+	return move
+}
